@@ -1,0 +1,82 @@
+<title>Monohybrid Cross Lab</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <svg viewBox="0 0 96 48" aria-hidden="true"><path d="M4 24C20 4 76 4 92 24C76 44 20 44 4 24Z" style="fill:var(--surface-2);stroke:var(--accent);stroke-width:3"/><circle cx="28" cy="24" r="9" style="fill:var(--dom)"/><circle cx="48" cy="24" r="9" style="fill:var(--rec)"/><circle cx="68" cy="24" r="9" style="fill:var(--dom)"/></svg>
+      <div>
+        <h1>Monohybrid Cross Lab</h1>
+        <p>Practise Mendel's crosses: parents, gametes, Punnett squares, F1 and F2.</p>
+      </div>
+    </div>
+    <div class="stats" id="stats" aria-label="Your session"></div>
+  </header>
+
+  <section class="controls" aria-label="Settings">
+    <div class="grow">
+      <label id="modeLbl">Mode</label>
+      <div class="seg" id="modeSeg" role="group" aria-labelledby="modeLbl"></div>
+    </div>
+    <label>Question type<select id="kindSel"></select></label>
+    <button type="button" class="btn primary" id="newBtn">New question</button>
+    <button type="button" class="btn" id="testOpen">Take a test</button>
+  </section>
+  <p class="modenote" id="modeNote"></p>
+
+  <section class="sheet" id="testPanel" hidden aria-label="Test setup">
+    <div class="sheet-h"><h2>Test mode</h2><button type="button" class="btn small" id="testClose">Close</button></div>
+    <p class="modenote">Work through a mixed set of questions like a summative. Every box is blank, there are no hints and nothing is checked until you hand in. Move between questions as you like, then submit to see your mark and review the working for each question. Each correct answer is worth 1 mark.</p>
+    <div class="wsrow">
+      <label>Length<select id="testN"></select></label>
+      <label>Timer<select id="testT"><option value="on">Timed</option><option value="off">Untimed</option></select></label>
+    </div>
+    <div class="actions"><button type="button" class="btn primary" id="testStart">Start the test</button></div>
+  </section>
+
+  <main id="stage"></main>
+
+  <details class="ref">
+    <summary>Key terms and the five steps</summary>
+    <dl>
+      <dt>Allele</dt><dd>One version of a gene, written as a letter. A capital is dominant, a small letter is recessive.</dd>
+      <dt>Genotype</dt><dd>The pair of alleles an organism has, such as Tt.</dd>
+      <dt>Phenotype</dt><dd>The trait you can see, such as tall or dwarf.</dd>
+      <dt>Homozygous</dt><dd>Two identical alleles (TT or tt).</dd>
+      <dt>Heterozygous</dt><dd>Two different alleles (Tt).</dd>
+      <dt>Gamete</dt><dd>A sex cell. It carries only one allele from each pair.</dd>
+      <dt>F1 and F2</dt><dd>The first and second generations after the parents (P). F2 comes from crossing two F1 organisms.</dd>
+      <dt>Incomplete dominance</dt><dd>Neither allele fully hides the other, so the heterozygote is in between (a red plant crossed with a white plant gives pink offspring).</dd>
+      <dt>Codominance</dt><dd>Both alleles are fully expressed in the heterozygote (a roan cow has red and white hairs; blood group AB makes both A and B antigens).</dd>
+      <dt>Multiple alleles</dt><dd>A gene with more than two versions in the population. ABO blood groups use three alleles: I<sup>A</sup>, I<sup>B</sup> and i. Each person has only two of them.</dd>
+      <dt>Test cross</dt><dd>Crossing an organism showing the dominant trait with a homozygous recessive one, to find out whether it is TT or Tt.</dd>
+      <dt>Method</dt><dd>1. Parent genotypes. 2. Gametes. 3. Punnett square. 4. Genotype ratio. 5. Phenotype ratio and probability.</dd>
+    </dl>
+  </details>
+  <details class="ref">
+    <summary>Command terms (exam words)</summary>
+    <dl>
+      <dt>Define</dt><dd>Give the precise meaning of a word, phrase or physical quantity.</dd>
+      <dt>Draw and label</dt><dd>Represent by means of a labelled, accurate diagram or graph, using a pencil. Use a ruler for straight lines.</dd>
+      <dt>State</dt><dd>Give a specific name, value or other brief answer without explanation or calculation.</dd>
+      <dt>Describe</dt><dd>Give a detailed account.</dd>
+      <dt>Distinguish</dt><dd>Make clear the differences between two or more concepts or items.</dd>
+      <dt>Outline</dt><dd>Give a brief account or summary.</dd>
+      <dt>Analyse</dt><dd>Break down in order to bring out the essential elements or structure.</dd>
+      <dt>Compare</dt><dd>Give an account of similarities and differences between two (or more) items or situations.</dd>
+      <dt>Deduce</dt><dd>Reach a conclusion from the information given.</dd>
+      <dt>Determine</dt><dd>Obtain the only possible answer.</dd>
+      <dt>Discuss</dt><dd>Offer a considered and balanced review that includes a range of arguments and factors.</dd>
+      <dt>Explain</dt><dd>Give a detailed account including reasons or causes.</dd>
+      <dt>Predict</dt><dd>Give an expected result.</dd>
+    </dl>
+  </details>
+</div>
+<script src="js/engine.js"></script>
+<script src="js/gen.js"></script>
+<script src="js/ped.js"></script>
+<script src="js/texts.js"></script>
+<script src="js/app.js"></script>
+<script src="js/test.js"></script>
