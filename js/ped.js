@@ -92,9 +92,9 @@ function pedSVG(F,order){
     s+=`<text x="${x}" y="${y+half+14}" class="plab">${p.label}</text>`;
   });
   [1,2,3].forEach(g=>{s+=`<text x="4" y="${Y[g]+4}" class="gl">${['','I','II','III'][g]}</text>`});
-  const w=Math.max(W,300),H=340,pts={};F.P.forEach(p=>pts[p.i]={x:X(p.i),y:Y[p.gen]+half+34});
+  const w=Math.max(W,300),H=376,pts={};F.P.forEach(p=>pts[p.i]={x:X(p.i),y:Y[p.gen]+half+34});
   const open=(extra)=>`<svg class="pedsvg" viewBox="0 0 ${w} ${H}" role="img" aria-label="Family pedigree with three generations" style="${extra}" fill="none" stroke="var(--ink)" stroke-width="1.6">${s}</svg>`;
-  return {w,H,pts,svg:open(`width:100%;max-width:${Math.max(w,420)}px;height:auto`),fixed:open(`width:${w}px;height:${H}px;display:block`)};
+  return {w,H,pts,svg:open(`width:100%;max-width:${Math.max(w,420)}px;height:auto`),fixed:open(`width:100%;height:100%;display:block`)};
 }
 const PED_TERM={dom:'Dominant',rec:'Recessive'};
 function genPed(kind){

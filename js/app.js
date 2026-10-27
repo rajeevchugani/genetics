@@ -69,8 +69,8 @@ function pedSteps(q){
   const ch=sp.chart;let ins='';
   sp.people.forEach(x=>{x.pts=ch.pts[x.i];const gid=`0_ped3_${x.i}`,keys=new Set(x.keys);
     addG(gid,'ped3',0,1,[x.exp],v=>{const s=(v[0]||'').trim();if(new RegExp('^'+sp.L+'[_\\-?*]?$').test(s))return [...keys].every(k=>k.includes(sp.L));const g=parseG(t,s);return !!g&&keys.has(gk(g))});
-    ins+=`<span class="pin" style="left:${x.pts.x}px;top:${x.pts.y}px">${fin(gid,0,'pg','',4,'Genotype of '+x.label)}</span>`});
-  steps.push({id:'ped3',body:`<p class="pcap">Type each person's genotype straight onto the chart, using the letter ${sp.L}. If you cannot tell whether someone is ${sp.L}${sp.L} or ${sp.L}${sp.L.toLowerCase()}, write just ${sp.L} (or ${sp.L}_) to mean at least one ${sp.L}, or any genotype that could be true.</p><div class="ped"><div class="pedwrap" style="width:${ch.w}px;height:${ch.H}px">${ch.fixed}${ins}</div></div>`});
+    ins+=`<span class="pin" style="left:${(x.pts.x/ch.w*100).toFixed(2)}%;top:${(x.pts.y/ch.H*100).toFixed(2)}%;width:${(54/ch.w*100).toFixed(2)}%">${fin(gid,0,'pg','',4,'Genotype of '+x.label)}</span>`});
+  steps.push({id:'ped3',body:`<p class="pcap">Type each person's genotype straight onto the chart, using the letter ${sp.L}. If you cannot tell whether someone is ${sp.L}${sp.L} or ${sp.L}${sp.L.toLowerCase()}, write just ${sp.L} (or ${sp.L}_) to mean at least one ${sp.L}, or any genotype that could be true.</p><div class="ped"><div class="pedwrap" style="max-width:${Math.round(ch.w*1.35)}px;aspect-ratio:${ch.w}/${ch.H}">${ch.fixed}${ins}</div></div>`});
   addG('0_ped4','ped4',0,1,[sp.het.letter],v=>v[0]===sp.het.letter);
   steps.push({id:'ped4',body:`<p class="pcap">Explain why ${sp.couple} must be heterozygous.</p><ul class="opts">${sp.optHTML(sp.het).map(o=>`<li>${o}</li>`).join('')}</ul><div class="row">${sel('0_ped4',0,[['A','A'],['B','B'],['C','C'],['D','D']],'Choose A, B, C or D')}</div>`});
   return steps;

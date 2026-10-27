@@ -89,11 +89,11 @@ input.f.bad{border-color:var(--bad);background:var(--bad-bg)}
 input.f.given{background:var(--surface-2);border-style:dashed;color:var(--ink)}
 input.f::placeholder{color:var(--muted);opacity:.6;font-weight:500}
 
-.pgrid{display:grid;grid-template-columns:auto repeat(2,minmax(0,1fr));gap:6px;width:min(100%,19rem);align-items:center}
+.pgrid{display:grid;grid-template-columns:5rem repeat(2,minmax(6rem,1fr));gap:8px;width:min(100%,26rem);align-items:center}
 .pgrid .h{font:700 1.2rem var(--font-mono);text-align:center;min-height:2.4rem;display:grid;place-items:center}
-.pgrid input.f{width:100%;height:3.1rem;font-size:1.15rem}
-.pgrid input.f.hd{width:100%;height:2.4rem}
-.cell{height:3.1rem;border:2px solid var(--line);border-radius:6px;display:grid;place-items:center;font:700 1.15rem var(--font-mono);background:var(--bg)}
+.pgrid input.f{width:100%;min-width:0;height:3.4rem;font-size:1.25rem;padding:4px 6px}
+.pgrid input.f.hd{width:100%;height:2.8rem}
+.cell{height:3.4rem;border:2px solid var(--line);border-radius:6px;display:grid;place-items:center;font:700 1.15rem var(--font-mono);background:var(--bg)}
 .cell.empty{color:var(--muted);font-weight:500}
 .cell.pop{animation:pop .4s both}
 @keyframes pop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
@@ -158,15 +158,15 @@ sup{font-size:.65em;line-height:0;vertical-align:super}
 select.f{font:600 .95rem var(--font-body,inherit);padding:7px 8px;border:2px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);max-width:100%}
 select.f.ok{border-color:var(--ok);background:var(--ok-bg)}select.f.bad{border-color:var(--bad);background:var(--bad-bg)}
 .cmd{font:600 .7rem var(--font-mono);text-transform:uppercase;letter-spacing:.05em;background:var(--surface-2);color:var(--muted);border-radius:99px;padding:2px 9px;cursor:help;white-space:nowrap}
-.ped{overflow-x:auto;padding:6px 0}
+.ped{overflow-x:auto;overflow-y:visible;padding:6px 0 10px}
 .pedsvg text.plab{font:600 11px var(--font-mono);fill:var(--ink);stroke:none;text-anchor:middle}
 .pedsvg text.gl{font:700 13px var(--font-mono);fill:var(--muted);stroke:none}
 .opts{margin:6px 0 10px;padding-left:1.1rem;display:flex;flex-direction:column;gap:6px;list-style:none;padding:0}
 .opts li{font-size:.95rem}
 
-.pedwrap{position:relative}
+.pedwrap{position:relative;width:100%;container-type:inline-size}
 .pedwrap .pin{position:absolute;transform:translateX(-50%)}
-input.f.pg{width:3.4rem;height:1.9rem;padding:2px 3px;font-size:.95rem}
+input.f.pg{width:100%;height:clamp(1.5rem,5.4cqw,2.3rem);padding:1px 2px;font-size:clamp(.72rem,2.5cqw,1.15rem)}
 </style>
 <div class="wrap">
   <header class="top">
@@ -669,9 +669,9 @@ function pedSVG(F,order){
     s+=`<text x="${x}" y="${y+half+14}" class="plab">${p.label}</text>`;
   });
   [1,2,3].forEach(g=>{s+=`<text x="4" y="${Y[g]+4}" class="gl">${['','I','II','III'][g]}</text>`});
-  const w=Math.max(W,300),H=340,pts={};F.P.forEach(p=>pts[p.i]={x:X(p.i),y:Y[p.gen]+half+34});
+  const w=Math.max(W,300),H=376,pts={};F.P.forEach(p=>pts[p.i]={x:X(p.i),y:Y[p.gen]+half+34});
   const open=(extra)=>`<svg class="pedsvg" viewBox="0 0 ${w} ${H}" role="img" aria-label="Family pedigree with three generations" style="${extra}" fill="none" stroke="var(--ink)" stroke-width="1.6">${s}</svg>`;
-  return {w,H,pts,svg:open(`width:100%;max-width:${Math.max(w,420)}px;height:auto`),fixed:open(`width:${w}px;height:${H}px;display:block`)};
+  return {w,H,pts,svg:open(`width:100%;max-width:${Math.max(w,420)}px;height:auto`),fixed:open(`width:100%;height:100%;display:block`)};
 }
 const PED_TERM={dom:'Dominant',rec:'Recessive'};
 function genPed(kind){
@@ -892,8 +892,8 @@ function pedSteps(q){
   const ch=sp.chart;let ins='';
   sp.people.forEach(x=>{x.pts=ch.pts[x.i];const gid=`0_ped3_${x.i}`,keys=new Set(x.keys);
     addG(gid,'ped3',0,1,[x.exp],v=>{const s=(v[0]||'').trim();if(new RegExp('^'+sp.L+'[_\\-?*]?$').test(s))return [...keys].every(k=>k.includes(sp.L));const g=parseG(t,s);return !!g&&keys.has(gk(g))});
-    ins+=`<span class="pin" style="left:${x.pts.x}px;top:${x.pts.y}px">${fin(gid,0,'pg','',4,'Genotype of '+x.label)}</span>`});
-  steps.push({id:'ped3',body:`<p class="pcap">Type each person's genotype straight onto the chart, using the letter ${sp.L}. If you cannot tell whether someone is ${sp.L}${sp.L} or ${sp.L}${sp.L.toLowerCase()}, write just ${sp.L} (or ${sp.L}_) to mean at least one ${sp.L}, or any genotype that could be true.</p><div class="ped"><div class="pedwrap" style="width:${ch.w}px;height:${ch.H}px">${ch.fixed}${ins}</div></div>`});
+    ins+=`<span class="pin" style="left:${(x.pts.x/ch.w*100).toFixed(2)}%;top:${(x.pts.y/ch.H*100).toFixed(2)}%;width:${(54/ch.w*100).toFixed(2)}%">${fin(gid,0,'pg','',4,'Genotype of '+x.label)}</span>`});
+  steps.push({id:'ped3',body:`<p class="pcap">Type each person's genotype straight onto the chart, using the letter ${sp.L}. If you cannot tell whether someone is ${sp.L}${sp.L} or ${sp.L}${sp.L.toLowerCase()}, write just ${sp.L} (or ${sp.L}_) to mean at least one ${sp.L}, or any genotype that could be true.</p><div class="ped"><div class="pedwrap" style="max-width:${Math.round(ch.w*1.35)}px;aspect-ratio:${ch.w}/${ch.H}">${ch.fixed}${ins}</div></div>`});
   addG('0_ped4','ped4',0,1,[sp.het.letter],v=>v[0]===sp.het.letter);
   steps.push({id:'ped4',body:`<p class="pcap">Explain why ${sp.couple} must be heterozygous.</p><ul class="opts">${sp.optHTML(sp.het).map(o=>`<li>${o}</li>`).join('')}</ul><div class="row">${sel('0_ped4',0,[['A','A'],['B','B'],['C','C'],['D','D']],'Choose A, B, C or D')}</div>`});
   return steps;
