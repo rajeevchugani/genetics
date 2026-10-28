@@ -91,7 +91,10 @@ function showResults(){
   <div class="score">${got}<span style="font-size:1.4rem"> / ${tot}</span></div>
   <p><b>${pct}%</b> · ${band}</p>
   ${weak.length?`<p>Look again at: ${weak.join(', ')}.</p>`:'<p>Every box was correct. Well done.</p>'}
-  <ul class="rlist">${T.qs.map((q,k)=>`<li><b>Q${k+1}</b><span>${KINDS[q.kind].split(' (')[0]}${q.rev&&q.kind!=='reverse'?' (find the parents)':''} · ${q.t.name}</span><span class="badge">${T.res[k].got}/${T.res[k].tot}</span><button type="button" class="btn small" data-tgo="${k}">Review</button></li>`).join('')}</ul>
+  ${(()=>{const byK={};T.qs.forEach((q,k)=>{const o=byK[q.kind]||(byK[q.kind]={got:0,tot:0});o.got+=T.res[k].got;o.tot+=T.res[k].tot});
+    const wk=Object.entries(byK).filter(([k,o])=>o.got<o.tot).sort((a,b)=>a[1].got/a[1].tot-b[1].got/b[1].tot).slice(0,3);
+    return wk.length?`<div class="prac"><h3>Practise your weakest areas</h3><div class="actions">${wk.map(([k,o])=>`<button type="button" class="btn" data-tprac="${k}" data-pm="${o.got/o.tot<.5?'guided':'practice'}">${KINDS[k].split(' (')[0]} · ${Math.round(o.got/o.tot*100)}%</button>`).join('')}</div><p class="pcap">Each button opens practice questions of that type. Guided mode (with tips) opens when you scored under half.</p></div>`:''})()}
+  <ul class="rlist">${T.qs.map((q,k)=>`<li><b>Q${k+1}</b><span>${KINDS[q.kind].split(' (')[0]}${q.rev&&q.kind!=='reverse'?' (find the parents)':''} · ${q.t.name}</span><span class="badge ${T.res[k].got===T.res[k].tot?'ok':'bad'}">${T.res[k].got===T.res[k].tot?'✓':'✗'} ${T.res[k].got}/${T.res[k].tot}</span><button type="button" class="btn small" data-tgo="${k}">Review</button></li>`).join('')}</ul>
   <div class="actions"><button type="button" class="btn primary" data-tact="again">Take another test</button><button type="button" class="btn" data-tact="exit">Back to practice</button></div></section>`;
   window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -106,6 +109,11 @@ function testExit(){
   document.querySelector('.controls').hidden=false;$('#modeNote').hidden=false;
   S.mode=pm;setMode(pm);newQuestion();
 }
+function testPractise(k,m){
+  clearInterval(TST.tick);S.test=null;
+  document.querySelector('.controls').hidden=false;$('#modeNote').hidden=false;
+  S.kind=k;$('#kindSel').value=k;setMode(m);newQuestion();window.scrollTo({top:0,behavior:'smooth'});
+}
 function testInit(){
   $('#testN').innerHTML=[6,8,10,12,15].map(n=>`<option value="${n}"${n===8?' selected':''}>${n} questions</option>`).join('');
   $('#testOpen').addEventListener('click',()=>{const p=$('#testPanel');p.hidden=!p.hidden;if(!p.hidden)p.scrollIntoView({block:'start',behavior:'smooth'})});
@@ -115,6 +123,7 @@ function testInit(){
   $('#testStart').addEventListener('click',testStart);
   const st=$('#stage');
   st.addEventListener('click',e=>{
+    const pr=e.target.closest('[data-tprac]');if(pr){testPractise(pr.dataset.tprac,pr.dataset.pm);return}
     const g=e.target.closest('[data-tgo]'),a=e.target.closest('[data-tact]');
     if(g&&S.test){const k=+g.dataset.tgo;if(S.test.done)reviewQ(k);else{saveTestAns();S.test.i=k;S.test.warned=false;loadTestQ()}}
     else if(a){const x=a.dataset.tact;if(x==='submit')testSubmit();else if(x==='results')showResults();else if(x==='again'){testStart()}else if(x==='exit')testExit()}

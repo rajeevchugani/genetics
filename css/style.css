@@ -1,20 +1,19 @@
 /* Layout concept: a lab bench. Control strip on top, one question sheet below it, and each cross is a stage card with the Punnett square at its centre. Dominant alleles are purple (Mendel's flowers), recessive alleles amber. */
 :root{
-  --bg:#edf2eb;--surface:#fafcf8;--surface-2:#e2eadf;--ink:#16231b;--muted:#53655a;--line:#c6d3c8;
-  --accent:#2b774a;--accent-ink:#ffffff;--dom:#6a3fa8;--dom-bg:#ebe3f6;--rec:#a85a08;--rec-bg:#f9e9d2;
-  --ok:#1b7440;--ok-bg:#dcf0e3;--bad:#b3261e;--bad-bg:#f8dedb;--focus:#2a6ad4;
+  --bg:#0E1020;--surface:#181B33;--surface-2:#20244A;--ink:#E4E7F7;--head:#FFFFFF;--muted:#A3A8C9;--line:#343A70;
+  --accent:#B8F34A;--accent-ink:#0E1020;--dom:#4CC9F0;--dom-bg:transparent;--rec:#FF7AA8;--rec-bg:transparent;
+  --accent-text:#B8F34A;--field:#6B74C0;--ok:#B8F34A;--ok-bg:transparent;--bad:#FF9D5C;--bad-bg:transparent;--focus:#FFFFFF;color-scheme:dark;
+  --ico-ok:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3.2 3.2L13 5' fill='none' stroke='%23B8F34A' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");--ico-bad:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4l8 8M12 4l-8 8' fill='none' stroke='%23FF9D5C' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   --font-display:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;
-  --font-body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --font-mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --font-body:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'DM Mono',ui-monospace,Menlo,Consolas,monospace;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0f1812;--surface:#16231b;--surface-2:#1f3025;--ink:#e5eee7;--muted:#9bafa0;--line:#2d4234;
-  --accent:#5cc487;--accent-ink:#0b1a11;--dom:#bda1f2;--dom-bg:#2a2241;--rec:#f4a85a;--rec-bg:#3a2a14;
-  --ok:#72d89b;--ok-bg:#16301f;--bad:#ff8f86;--bad-bg:#3a1d1b;--focus:#7fabff;color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0f1812;--surface:#16231b;--surface-2:#1f3025;--ink:#e5eee7;--muted:#9bafa0;--line:#2d4234;
-  --accent:#5cc487;--accent-ink:#0b1a11;--dom:#bda1f2;--dom-bg:#2a2241;--rec:#f4a85a;--rec-bg:#3a2a14;
-  --ok:#72d89b;--ok-bg:#16301f;--bad:#ff8f86;--bad-bg:#3a1d1b;--focus:#7fabff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#F3F4FF;--surface:#FFFFFF;--surface-2:#EAECFB;--ink:#1C2040;--head:#1C2040;--muted:#4B5280;--line:#C3C8EA;
+  --accent:#3D7A05;--accent-text:#356C04;--field:#7079B0;--accent-ink:#FFFFFF;--dom:#08698F;--rec:#C4165E;
+  --ok:#2F6B04;--bad:#B53808;--focus:#1C2040;color-scheme:light;
+  --ico-ok:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3.2 3.2L13 5' fill='none' stroke='%232F6B04' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");--ico-bad:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4l8 8M12 4l-8 8' fill='none' stroke='%23B53808' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:16px/1.5 var(--font-body);
@@ -162,3 +161,85 @@ select.f.ok{border-color:var(--ok);background:var(--ok-bg)}select.f.bad{border-c
 .pedwrap{position:relative;width:100%;container-type:inline-size}
 .pedwrap .pin{position:absolute;transform:translateX(-50%)}
 input.f.pg{width:100%;height:clamp(1.5rem,5.4cqw,2.3rem);padding:1px 2px;font-size:clamp(.72rem,2.5cqw,1.15rem)}
+
+/* ================= Science Revision Hub look ================= */
+body{font-size:16px}
+h1,h2,h3{color:var(--head);font-weight:800;letter-spacing:-.03em}
+h1{font-size:clamp(2rem,5.6vw,3.1rem);line-height:1.02;color:var(--accent)}
+.eyebrow{display:flex;align-items:center;gap:10px;font:500 .8rem var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.eyebrow i{width:10px;height:10px;border-radius:50%;background:var(--accent);display:block;flex:none}
+.brand svg{width:72px}
+.top-r{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.theme{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--line)}
+.theme svg{width:18px;height:18px;flex:none}
+.controls,.sheet,.stage,details.ref{background:var(--surface);border:1px solid var(--line);border-radius:22px}
+.sheet,.stage{border-top:2px solid var(--accent);padding:20px 22px}
+.controls{padding:16px 20px}
+details.ref{padding:6px 20px}details.ref summary{cursor:pointer;font-weight:700;padding:12px 0}
+.stat{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:8px 14px}
+.stat b{color:var(--accent)}
+.stat span,.controls label,.badge{font-size:.85rem}
+.badge{background:var(--surface-2);border:1px solid var(--line);color:var(--ink)}
+.seg{border:0;background:transparent;border-radius:0;overflow:visible;gap:8px}
+.seg button{border:1.5px solid var(--line);border-right:1.5px solid var(--line);border-radius:99px;background:var(--surface-2);color:var(--ink);padding:9px 16px;transition:transform .15s ease}
+.seg button:last-child{border-right:1.5px solid var(--line)}
+.seg button:hover{transform:translateY(-2px)}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn{border:1.5px solid var(--line);border-radius:99px;background:var(--surface-2);color:var(--ink);padding:9px 18px;transition:transform .15s ease,border-color .15s ease}
+.btn:hover{border-color:var(--accent);transform:translateY(-2px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.small{padding:6px 12px}
+select{background:var(--surface-2);border:1.5px solid var(--line);border-radius:12px;color:var(--ink)}
+select option{background:var(--surface);color:var(--ink)}
+.num{background:var(--accent);color:var(--accent-ink)}
+.step{border-top:1px solid var(--line)}
+.tip,.pcap,.modenote{font-size:.97rem}
+.tip{background:var(--surface-2);border:1px solid var(--line);border-radius:14px}
+.keyline{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:10px 14px}
+.chip.dom,.chip.rec{background:transparent;border:1px solid currentColor;border-radius:8px}
+.cmd{background:transparent;border:1px solid var(--line);color:var(--accent);font-size:.78rem}
+.pad button{background:var(--surface-2);border:1.5px solid var(--line);border-radius:12px}
+/* answer fields: thin coloured borders, icon as well as colour */
+input.f,select.f{background-color:var(--surface-2);border:1.5px solid var(--line);border-radius:12px;color:var(--ink);background-repeat:no-repeat}
+input.f.given{background:transparent;border-style:dashed}
+input.f.ok,select.f.ok{border-color:var(--ok);background-color:var(--surface-2);background-image:var(--ico-ok);background-position:right 5px top 4px;background-size:13px;background-repeat:no-repeat}
+input.f.bad,select.f.bad{border-color:var(--bad);background-color:var(--surface-2);background-image:var(--ico-bad);background-position:right 5px top 4px;background-size:13px;background-repeat:no-repeat}
+select.f.ok,select.f.bad{background-position:left 6px center;padding-left:26px}
+.cell{background:var(--surface-2);border:1.5px solid var(--line);border-radius:12px}
+.pgrid .h{color:var(--head)}
+.result{border:1.5px solid var(--line);background:var(--surface-2);border-radius:16px}
+.result.ok{border-color:var(--ok);color:var(--ink);background:var(--surface-2)}
+.result.bad{border-color:var(--bad);color:var(--ink);background:var(--surface-2)}
+.result.ok::before{content:'✓ ';color:var(--ok);font-weight:800}
+.result.bad::before{content:'✗ ';color:var(--bad);font-weight:800}
+.state.ok{color:var(--ok)}.state.bad{color:var(--bad)}
+.tnav button{background:var(--surface-2);border:1.5px solid var(--line);border-radius:12px;color:var(--ink)}
+.tnav button.cur{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.tnav button.ok{border-color:var(--ok);background:var(--surface-2);color:var(--ink)}.tnav button.ok::after{content:' ✓';color:var(--ok)}
+.tnav button.bad{border-color:var(--bad);background:var(--surface-2);color:var(--ink)}.tnav button.bad::after{content:' ✗';color:var(--bad)}
+.tnav button.part{border-color:var(--bad);background:var(--surface-2);color:var(--ink)}.tnav button.part::after{content:' –';color:var(--muted)}
+.tnav button.has{background:var(--surface-2);border-color:var(--accent)}
+.score{color:var(--accent);font-family:var(--font-display);font-weight:800}
+.rlist .badge.ok{border-color:var(--ok)}.rlist .badge.bad{border-color:var(--bad)}
+.pedsvg text.gl{fill:var(--muted)}
+@media (prefers-reduced-motion:reduce){.btn,.seg button{transition:none}.btn:hover,.seg button:hover{transform:none}}
+.a1,.a2{color:inherit}
+
+/* contrast: field outlines at 3:1 or better, accent text with a darker light-theme shade */
+input.f,select.f,select,.cell{border-color:var(--field)}
+input.f.given{border-color:var(--field)}
+input.f.ok,select.f.ok{border-color:var(--ok)}input.f.bad,select.f.bad{border-color:var(--bad)}
+h1,.stat b,.score,.cmd,.state.ok{color:var(--accent-text)}
+.state.ok{color:var(--ok)}
+.how{display:flex;gap:16px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:22px;padding:16px 20px}
+.how[hidden]{display:none}
+.how ul{margin:8px 0 0;padding-left:1.2rem;display:flex;flex-direction:column;gap:4px;font-size:.97rem}
+.how b{font-family:var(--font-display);font-weight:800;color:var(--head)}
+.prac{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:12px}
+
+/* link back to the Science Revision Hub (first item on the page) */
+.hublink{display:inline-flex;align-items:center;align-self:flex-start;margin-bottom:-4px;padding:5px 14px;border:1px solid var(--line);border-radius:999px;background:none;color:var(--muted);font:500 12px/1.4 var(--font-mono);letter-spacing:.06em;text-decoration:none;transition:color .15s ease,border-color .15s ease}
+.hublink:hover,.hublink:focus-visible{color:var(--head);border-color:var(--accent)}
+@media (max-width:560px){.hublink{margin-bottom:-8px}}
+@media (prefers-reduced-motion:reduce){.hublink{transition:none}}
+@media (max-width:380px){.pgrid{grid-template-columns:3.4rem repeat(2,minmax(0,1fr));gap:6px}}

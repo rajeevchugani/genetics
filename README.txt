@@ -3,7 +3,7 @@ MONOHYBRID CROSS LAB - how to publish
 Folder contents
   index.html       the page students open
   css/style.css    the styling
-  js/              the question engine and screens (keep the file names)
+  js/              the question engine, screens and theme switch (keep the file names)
   single-file.html the same site in ONE file (use if a platform only accepts one HTML file)
 
 Keep the folder structure exactly as it is. Open index.html in a browser to test it.
@@ -16,5 +16,12 @@ Easy ways to publish
   3. School website or LMS: upload the folder to your web space and link to index.html.
      If it only accepts a single file, upload single-file.html instead.
 
-The page loads its fonts from Google Fonts. If a school network blocks them, the site
-still works with plain system fonts.
+Fonts (loaded from Google Fonts): Bricolage Grotesque (headings), DM Sans (text), DM Mono (labels and numbers).
+If a school network blocks them, the site still works with plain system fonts.
+
+Theme: dark by default, with a Light/Dark button in the header. The choice is remembered in the
+student's browser (localStorage) when the browser allows it.
+
+Hub link
+  The "← Science Revision Hub" link at the top of the page goes to https://sites.google.com/cis.edu.hk/y11science.
+  To change the address, edit the href in the link with class="hublink" in index.html (and in single-file.html if you use it).

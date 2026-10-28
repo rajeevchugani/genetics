@@ -91,6 +91,24 @@ function genRev(sys,kind){
     cnt=spreadCounts(cnt);
     intro=`Two ${t.orgPL} are crossed. Among the ${T} offspring, ${listCounts(t,cnt,T)}. Work out the genotypes of the two parents.`;
     q.rev={tpl,intro,reason};q.stages=[mkStage(t,p[0],p[1],'Cross','offspring')];
+  }else if(sys==='multi'){
+    const tpl=pick(['m1','m2','m3','m4','m5']),T=pick([8,12,16]),h=g=>t.gHTML(g),I=k=>t.tHTML(k);
+    if(tpl==='m1'){p=[['CC','c'],['c','c']];
+      intro=`A chinchilla rabbit is mated with an albino rabbit. Of their ${T} offspring, ${T/2} are chinchilla and ${T/2} are albino. Work out the genotypes of the two parents.`;
+      reason=`The albino rabbit is ${h(['c','c'])} and can only pass on ${I('c')}. Half the offspring are albino, so the chinchilla parent passes on ${I('c')} about half the time. It is not agouti, so its other allele is ${I('CC')}. The parents are ${h(['CC','c'])} and ${h(['c','c'])}.`}
+    else if(tpl==='m2'){p=[['CA','c'],['CA','c']];
+      intro=`Two agouti rabbits are mated. Of their ${T} offspring, ${T*3/4} are agouti and ${T/4} are albino. Work out the genotypes of the two parents.`;
+      reason=`An albino offspring must be ${h(['c','c'])}, so each parent passed on ${I('c')}. Both parents are agouti, so each also has ${I('CA')}. Both parents are ${h(['CA','c'])}. The 3 : 1 ratio fits this cross.`}
+    else if(tpl==='m3'){p=[['CC','c'],['CC','c']];
+      intro=`Two chinchilla rabbits are mated. Of their ${T} offspring, ${T*3/4} are chinchilla and ${T/4} are albino. Work out the genotypes of the two parents.`;
+      reason=`An albino offspring must be ${h(['c','c'])}, so each parent passed on ${I('c')}. Both parents are chinchilla, so each also has ${I('CC')}. Both parents are ${h(['CC','c'])}.`}
+    else if(tpl==='m4'){p=[['CA','CH'],['c','c']];
+      intro=`An agouti rabbit is mated with an albino rabbit. Of their ${T} offspring, ${T/2} are agouti and ${T/2} are Himalayan. Work out the genotypes of the two parents.`;
+      reason=`The albino parent is ${h(['c','c'])} and passes on only ${I('c')}. The Himalayan offspring must be ${h(['CH','c'])}, so the agouti parent passed on ${I('CH')} half the time. It shows agouti, so it also has ${I('CA')}. The parents are ${h(['CA','CH'])} and ${h(['c','c'])}.`}
+    else{p=[['CH','c'],['CH','c']];
+      intro='Two Himalayan rabbits are mated and one of their offspring is albino. Work out the genotypes of the two parents.';
+      reason=`An albino offspring must be ${h(['c','c'])}, so each parent passed on ${I('c')}. Both parents are Himalayan, which is dominant only to albino, so they cannot carry ${I('CA')} or ${I('CC')}. Both parents are ${h(['CH','c'])}.`}
+    q.rev={tpl,intro,reason};q.stages=[mkStage(t,p[0],p[1],'Cross','offspring')];
   }else{
     const [AA,AB,Ai,BB,Bi,ii]=t.genos,tpl=pick(['b1','b2','b3','b4','b5','b6']),I=k=>t.tHTML(k);
     if(tpl==='b1'){p=[Ai,Bi];
@@ -155,9 +173,9 @@ function genAboq(kind){
 function genQuestion(kind){
   const R=Math.random();
   if(kind==='aboq')return genAboq(kind);
-  if(kind==='multi')return genFwd('multi','cross',kind);
+  if(kind==='multi')return R<.4?genRev('multi',kind):genFwd('multi','cross',kind);
   if(kind==='ped')return genPed(kind);
-  if(kind==='reverse')return genRev(R<.5?'dom':R<.68?'inc':R<.78?'cod':'abo',kind);
+  if(kind==='reverse')return genRev(R<.45?'dom':R<.62?'inc':R<.72?'cod':R<.86?'abo':'multi',kind);
   if(kind==='inc')return R<.35?genRev('inc',kind):genFwd('inc',pick(['f1','f2','full','cross','cross']),kind);
   if(kind==='cod'){const abo=Math.random()<.35;return R<.3?genRev(abo?'abo':'cod',kind):(abo?genFwd('abo','cross',kind):genFwd('cod',pick(['f1','f2','full','cross','cross','cross']),kind))}
   if(kind==='abo')return R<.3?genRev('abo',kind):R<.6?genAboq(kind):genFwd('abo','cross',kind);

@@ -39,7 +39,7 @@ function tipOf(step,q,si){
   switch(step){
     case 'par':{
       let tip;
-      if(rev)tip=t.sys==='abo'?'Work backwards from the children. A child with group O must be ii, so both parents passed on an i. Look at which groups appear and which are missing.':'Work backwards from the offspring. Ask which alleles the parents must have passed on to give these results, and look for ratios such as 1 : 1, 3 : 1 or 1 : 2 : 1.';
+      if(rev)tip=t.sys==='multi'?'Work backwards from the offspring. An albino offspring must be cc, so each parent passed on a c. A Himalayan offspring must be CHCH or CHc. Use the dominance order to decide what else each parent carries.':t.sys==='abo'?'Work backwards from the children. A child with group O must be ii, so both parents passed on an i. Look at which groups appear and which are missing.':'Work backwards from the offspring. Ask which alleles the parents must have passed on to give these results, and look for ratios such as 1 : 1, 3 : 1 or 1 : 2 : 1.';
       else if(t.sys==='dom')tip='"Homozygous" means two identical alleles. "Heterozygous" means one of each. A plain recessive phenotype can only be two small letters.';
       else if(t.sys==='multi')tip='Use the dominance order in the key. A homozygous rabbit has two identical alleles. A rabbit described as X/Y has one X allele and one Y allele.';
       else if(t.sys==='abo')tip='Group O is ii and group AB is IAIB. Group A can be IAIA or IAi and group B can be IBIB or IBi. The question tells you which.';

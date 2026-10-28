@@ -87,7 +87,7 @@ function pedSVG(F,order){
     s+=sib((X(c.a)+X(c.b))/2,Y[2],c.kids,Y[3]);
   });
   F.P.forEach(p=>{
-    const x=X(p.i),y=Y[p.gen],fill=p.aff?'var(--ink)':'var(--surface)';
+    const x=X(p.i),y=Y[p.gen],fill=p.aff?'var(--accent)':'var(--surface)';
     s+=p.sex==='M'?`<rect x="${x-half}" y="${y-half}" width="${2*half}" height="${2*half}" fill="${fill}"/>`:`<circle cx="${x}" cy="${y}" r="${half}" fill="${fill}"/>`;
     s+=`<text x="${x}" y="${y+half+14}" class="plab">${p.label}</text>`;
   });

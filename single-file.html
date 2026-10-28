@@ -1,25 +1,25 @@
 <title>Monohybrid Cross Lab</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@500&display=swap">
+<script>try{if(localStorage.getItem('mlab-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
 <style>
 /* Layout concept: a lab bench. Control strip on top, one question sheet below it, and each cross is a stage card with the Punnett square at its centre. Dominant alleles are purple (Mendel's flowers), recessive alleles amber. */
 :root{
-  --bg:#edf2eb;--surface:#fafcf8;--surface-2:#e2eadf;--ink:#16231b;--muted:#53655a;--line:#c6d3c8;
-  --accent:#2b774a;--accent-ink:#ffffff;--dom:#6a3fa8;--dom-bg:#ebe3f6;--rec:#a85a08;--rec-bg:#f9e9d2;
-  --ok:#1b7440;--ok-bg:#dcf0e3;--bad:#b3261e;--bad-bg:#f8dedb;--focus:#2a6ad4;
+  --bg:#0E1020;--surface:#181B33;--surface-2:#20244A;--ink:#E4E7F7;--head:#FFFFFF;--muted:#A3A8C9;--line:#343A70;
+  --accent:#B8F34A;--accent-ink:#0E1020;--dom:#4CC9F0;--dom-bg:transparent;--rec:#FF7AA8;--rec-bg:transparent;
+  --accent-text:#B8F34A;--field:#6B74C0;--ok:#B8F34A;--ok-bg:transparent;--bad:#FF9D5C;--bad-bg:transparent;--focus:#FFFFFF;color-scheme:dark;
+  --ico-ok:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3.2 3.2L13 5' fill='none' stroke='%23B8F34A' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");--ico-bad:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4l8 8M12 4l-8 8' fill='none' stroke='%23FF9D5C' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   --font-display:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;
-  --font-body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --font-mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --font-body:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'DM Mono',ui-monospace,Menlo,Consolas,monospace;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0f1812;--surface:#16231b;--surface-2:#1f3025;--ink:#e5eee7;--muted:#9bafa0;--line:#2d4234;
-  --accent:#5cc487;--accent-ink:#0b1a11;--dom:#bda1f2;--dom-bg:#2a2241;--rec:#f4a85a;--rec-bg:#3a2a14;
-  --ok:#72d89b;--ok-bg:#16301f;--bad:#ff8f86;--bad-bg:#3a1d1b;--focus:#7fabff;color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0f1812;--surface:#16231b;--surface-2:#1f3025;--ink:#e5eee7;--muted:#9bafa0;--line:#2d4234;
-  --accent:#5cc487;--accent-ink:#0b1a11;--dom:#bda1f2;--dom-bg:#2a2241;--rec:#f4a85a;--rec-bg:#3a2a14;
-  --ok:#72d89b;--ok-bg:#16301f;--bad:#ff8f86;--bad-bg:#3a1d1b;--focus:#7fabff;color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#F3F4FF;--surface:#FFFFFF;--surface-2:#EAECFB;--ink:#1C2040;--head:#1C2040;--muted:#4B5280;--line:#C3C8EA;
+  --accent:#3D7A05;--accent-text:#356C04;--field:#7079B0;--accent-ink:#FFFFFF;--dom:#08698F;--rec:#C4165E;
+  --ok:#2F6B04;--bad:#B53808;--focus:#1C2040;color-scheme:light;
+  --ico-ok:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3.2 3.2L13 5' fill='none' stroke='%232F6B04' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");--ico-bad:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4l8 8M12 4l-8 8' fill='none' stroke='%23B53808' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:16px/1.5 var(--font-body);
@@ -167,18 +167,116 @@ select.f.ok{border-color:var(--ok);background:var(--ok-bg)}select.f.bad{border-c
 .pedwrap{position:relative;width:100%;container-type:inline-size}
 .pedwrap .pin{position:absolute;transform:translateX(-50%)}
 input.f.pg{width:100%;height:clamp(1.5rem,5.4cqw,2.3rem);padding:1px 2px;font-size:clamp(.72rem,2.5cqw,1.15rem)}
+
+/* ================= Science Revision Hub look ================= */
+body{font-size:16px}
+h1,h2,h3{color:var(--head);font-weight:800;letter-spacing:-.03em}
+h1{font-size:clamp(2rem,5.6vw,3.1rem);line-height:1.02;color:var(--accent)}
+.eyebrow{display:flex;align-items:center;gap:10px;font:500 .8rem var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.eyebrow i{width:10px;height:10px;border-radius:50%;background:var(--accent);display:block;flex:none}
+.brand svg{width:72px}
+.top-r{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.theme{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--line)}
+.theme svg{width:18px;height:18px;flex:none}
+.controls,.sheet,.stage,details.ref{background:var(--surface);border:1px solid var(--line);border-radius:22px}
+.sheet,.stage{border-top:2px solid var(--accent);padding:20px 22px}
+.controls{padding:16px 20px}
+details.ref{padding:6px 20px}details.ref summary{cursor:pointer;font-weight:700;padding:12px 0}
+.stat{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:8px 14px}
+.stat b{color:var(--accent)}
+.stat span,.controls label,.badge{font-size:.85rem}
+.badge{background:var(--surface-2);border:1px solid var(--line);color:var(--ink)}
+.seg{border:0;background:transparent;border-radius:0;overflow:visible;gap:8px}
+.seg button{border:1.5px solid var(--line);border-right:1.5px solid var(--line);border-radius:99px;background:var(--surface-2);color:var(--ink);padding:9px 16px;transition:transform .15s ease}
+.seg button:last-child{border-right:1.5px solid var(--line)}
+.seg button:hover{transform:translateY(-2px)}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn{border:1.5px solid var(--line);border-radius:99px;background:var(--surface-2);color:var(--ink);padding:9px 18px;transition:transform .15s ease,border-color .15s ease}
+.btn:hover{border-color:var(--accent);transform:translateY(-2px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.small{padding:6px 12px}
+select{background:var(--surface-2);border:1.5px solid var(--line);border-radius:12px;color:var(--ink)}
+select option{background:var(--surface);color:var(--ink)}
+.num{background:var(--accent);color:var(--accent-ink)}
+.step{border-top:1px solid var(--line)}
+.tip,.pcap,.modenote{font-size:.97rem}
+.tip{background:var(--surface-2);border:1px solid var(--line);border-radius:14px}
+.keyline{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:10px 14px}
+.chip.dom,.chip.rec{background:transparent;border:1px solid currentColor;border-radius:8px}
+.cmd{background:transparent;border:1px solid var(--line);color:var(--accent);font-size:.78rem}
+.pad button{background:var(--surface-2);border:1.5px solid var(--line);border-radius:12px}
+/* answer fields: thin coloured borders, icon as well as colour */
+input.f,select.f{background-color:var(--surface-2);border:1.5px solid var(--line);border-radius:12px;color:var(--ink);background-repeat:no-repeat}
+input.f.given{background:transparent;border-style:dashed}
+input.f.ok,select.f.ok{border-color:var(--ok);background-color:var(--surface-2);background-image:var(--ico-ok);background-position:right 5px top 4px;background-size:13px;background-repeat:no-repeat}
+input.f.bad,select.f.bad{border-color:var(--bad);background-color:var(--surface-2);background-image:var(--ico-bad);background-position:right 5px top 4px;background-size:13px;background-repeat:no-repeat}
+select.f.ok,select.f.bad{background-position:left 6px center;padding-left:26px}
+.cell{background:var(--surface-2);border:1.5px solid var(--line);border-radius:12px}
+.pgrid .h{color:var(--head)}
+.result{border:1.5px solid var(--line);background:var(--surface-2);border-radius:16px}
+.result.ok{border-color:var(--ok);color:var(--ink);background:var(--surface-2)}
+.result.bad{border-color:var(--bad);color:var(--ink);background:var(--surface-2)}
+.result.ok::before{content:'✓ ';color:var(--ok);font-weight:800}
+.result.bad::before{content:'✗ ';color:var(--bad);font-weight:800}
+.state.ok{color:var(--ok)}.state.bad{color:var(--bad)}
+.tnav button{background:var(--surface-2);border:1.5px solid var(--line);border-radius:12px;color:var(--ink)}
+.tnav button.cur{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.tnav button.ok{border-color:var(--ok);background:var(--surface-2);color:var(--ink)}.tnav button.ok::after{content:' ✓';color:var(--ok)}
+.tnav button.bad{border-color:var(--bad);background:var(--surface-2);color:var(--ink)}.tnav button.bad::after{content:' ✗';color:var(--bad)}
+.tnav button.part{border-color:var(--bad);background:var(--surface-2);color:var(--ink)}.tnav button.part::after{content:' –';color:var(--muted)}
+.tnav button.has{background:var(--surface-2);border-color:var(--accent)}
+.score{color:var(--accent);font-family:var(--font-display);font-weight:800}
+.rlist .badge.ok{border-color:var(--ok)}.rlist .badge.bad{border-color:var(--bad)}
+.pedsvg text.gl{fill:var(--muted)}
+@media (prefers-reduced-motion:reduce){.btn,.seg button{transition:none}.btn:hover,.seg button:hover{transform:none}}
+.a1,.a2{color:inherit}
+
+/* contrast: field outlines at 3:1 or better, accent text with a darker light-theme shade */
+input.f,select.f,select,.cell{border-color:var(--field)}
+input.f.given{border-color:var(--field)}
+input.f.ok,select.f.ok{border-color:var(--ok)}input.f.bad,select.f.bad{border-color:var(--bad)}
+h1,.stat b,.score,.cmd,.state.ok{color:var(--accent-text)}
+.state.ok{color:var(--ok)}
+.how{display:flex;gap:16px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:22px;padding:16px 20px}
+.how[hidden]{display:none}
+.how ul{margin:8px 0 0;padding-left:1.2rem;display:flex;flex-direction:column;gap:4px;font-size:.97rem}
+.how b{font-family:var(--font-display);font-weight:800;color:var(--head)}
+.prac{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:12px}
+
+/* link back to the Science Revision Hub (first item on the page) */
+.hublink{display:inline-flex;align-items:center;align-self:flex-start;margin-bottom:-4px;padding:5px 14px;border:1px solid var(--line);border-radius:999px;background:none;color:var(--muted);font:500 12px/1.4 var(--font-mono);letter-spacing:.06em;text-decoration:none;transition:color .15s ease,border-color .15s ease}
+.hublink:hover,.hublink:focus-visible{color:var(--head);border-color:var(--accent)}
+@media (max-width:560px){.hublink{margin-bottom:-8px}}
+@media (prefers-reduced-motion:reduce){.hublink{transition:none}}
+@media (max-width:380px){.pgrid{grid-template-columns:3.4rem repeat(2,minmax(0,1fr));gap:6px}}
 </style>
 <div class="wrap">
+  <a class="hublink" href="https://sites.google.com/cis.edu.hk/y11science" target="_blank" rel="noopener">← Science Revision Hub</a>
   <header class="top">
     <div class="brand">
       <svg viewBox="0 0 96 48" aria-hidden="true"><path d="M4 24C20 4 76 4 92 24C76 44 20 44 4 24Z" style="fill:var(--surface-2);stroke:var(--accent);stroke-width:3"/><circle cx="28" cy="24" r="9" style="fill:var(--dom)"/><circle cx="48" cy="24" r="9" style="fill:var(--rec)"/><circle cx="68" cy="24" r="9" style="fill:var(--dom)"/></svg>
       <div>
-        <h1>Monohybrid Cross Lab</h1>
+        <div class="eyebrow"><i></i><span>Biology · Code of Life</span></div>
+        <h1>Monohybrid <span class="a1">Cross</span> <span class="a2">Lab</span></h1>
         <p>Practise Mendel's crosses: parents, gametes, Punnett squares, F1 and F2.</p>
       </div>
     </div>
-    <div class="stats" id="stats" aria-label="Your session"></div>
+    <div class="top-r"><div class="stats" id="stats" aria-label="Your session"></div><button type="button" class="btn theme" id="themeBtn" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path id="themeIco" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span id="themeTxt">Light mode</span></button></div>
   </header>
+
+  <section class="how" id="how" aria-label="How this works">
+    <div>
+      <b>How this works</b>
+      <ul>
+        <li><b>Guided</b>: the parents are given, tips sit under every step and your answers are checked as you type.</li>
+        <li><b>Practice</b>: write everything yourself and press Hint if you get stuck.</li>
+        <li><b>Challenge</b>: every box is blank and there are no hints.</li>
+        <li><b>Take a test</b>: a mixed paper that is marked at the end, like the real thing. You can then practise your weakest areas.</li>
+        <li>The small labels such as STATE or DEDUCE are exam command terms. Their meanings are in the Command terms list at the bottom of the page.</li>
+      </ul>
+    </div>
+    <button type="button" class="btn small" id="howClose">Got it</button>
+  </section>
 
   <section class="controls" aria-label="Settings">
     <div class="grow">
@@ -491,6 +589,24 @@ function genRev(sys,kind){
     cnt=spreadCounts(cnt);
     intro=`Two ${t.orgPL} are crossed. Among the ${T} offspring, ${listCounts(t,cnt,T)}. Work out the genotypes of the two parents.`;
     q.rev={tpl,intro,reason};q.stages=[mkStage(t,p[0],p[1],'Cross','offspring')];
+  }else if(sys==='multi'){
+    const tpl=pick(['m1','m2','m3','m4','m5']),T=pick([8,12,16]),h=g=>t.gHTML(g),I=k=>t.tHTML(k);
+    if(tpl==='m1'){p=[['CC','c'],['c','c']];
+      intro=`A chinchilla rabbit is mated with an albino rabbit. Of their ${T} offspring, ${T/2} are chinchilla and ${T/2} are albino. Work out the genotypes of the two parents.`;
+      reason=`The albino rabbit is ${h(['c','c'])} and can only pass on ${I('c')}. Half the offspring are albino, so the chinchilla parent passes on ${I('c')} about half the time. It is not agouti, so its other allele is ${I('CC')}. The parents are ${h(['CC','c'])} and ${h(['c','c'])}.`}
+    else if(tpl==='m2'){p=[['CA','c'],['CA','c']];
+      intro=`Two agouti rabbits are mated. Of their ${T} offspring, ${T*3/4} are agouti and ${T/4} are albino. Work out the genotypes of the two parents.`;
+      reason=`An albino offspring must be ${h(['c','c'])}, so each parent passed on ${I('c')}. Both parents are agouti, so each also has ${I('CA')}. Both parents are ${h(['CA','c'])}. The 3 : 1 ratio fits this cross.`}
+    else if(tpl==='m3'){p=[['CC','c'],['CC','c']];
+      intro=`Two chinchilla rabbits are mated. Of their ${T} offspring, ${T*3/4} are chinchilla and ${T/4} are albino. Work out the genotypes of the two parents.`;
+      reason=`An albino offspring must be ${h(['c','c'])}, so each parent passed on ${I('c')}. Both parents are chinchilla, so each also has ${I('CC')}. Both parents are ${h(['CC','c'])}.`}
+    else if(tpl==='m4'){p=[['CA','CH'],['c','c']];
+      intro=`An agouti rabbit is mated with an albino rabbit. Of their ${T} offspring, ${T/2} are agouti and ${T/2} are Himalayan. Work out the genotypes of the two parents.`;
+      reason=`The albino parent is ${h(['c','c'])} and passes on only ${I('c')}. The Himalayan offspring must be ${h(['CH','c'])}, so the agouti parent passed on ${I('CH')} half the time. It shows agouti, so it also has ${I('CA')}. The parents are ${h(['CA','CH'])} and ${h(['c','c'])}.`}
+    else{p=[['CH','c'],['CH','c']];
+      intro='Two Himalayan rabbits are mated and one of their offspring is albino. Work out the genotypes of the two parents.';
+      reason=`An albino offspring must be ${h(['c','c'])}, so each parent passed on ${I('c')}. Both parents are Himalayan, which is dominant only to albino, so they cannot carry ${I('CA')} or ${I('CC')}. Both parents are ${h(['CH','c'])}.`}
+    q.rev={tpl,intro,reason};q.stages=[mkStage(t,p[0],p[1],'Cross','offspring')];
   }else{
     const [AA,AB,Ai,BB,Bi,ii]=t.genos,tpl=pick(['b1','b2','b3','b4','b5','b6']),I=k=>t.tHTML(k);
     if(tpl==='b1'){p=[Ai,Bi];
@@ -555,9 +671,9 @@ function genAboq(kind){
 function genQuestion(kind){
   const R=Math.random();
   if(kind==='aboq')return genAboq(kind);
-  if(kind==='multi')return genFwd('multi','cross',kind);
+  if(kind==='multi')return R<.4?genRev('multi',kind):genFwd('multi','cross',kind);
   if(kind==='ped')return genPed(kind);
-  if(kind==='reverse')return genRev(R<.5?'dom':R<.68?'inc':R<.78?'cod':'abo',kind);
+  if(kind==='reverse')return genRev(R<.45?'dom':R<.62?'inc':R<.72?'cod':R<.86?'abo':'multi',kind);
   if(kind==='inc')return R<.35?genRev('inc',kind):genFwd('inc',pick(['f1','f2','full','cross','cross']),kind);
   if(kind==='cod'){const abo=Math.random()<.35;return R<.3?genRev(abo?'abo':'cod',kind):(abo?genFwd('abo','cross',kind):genFwd('cod',pick(['f1','f2','full','cross','cross','cross']),kind))}
   if(kind==='abo')return R<.3?genRev('abo',kind):R<.6?genAboq(kind):genFwd('abo','cross',kind);
@@ -664,7 +780,7 @@ function pedSVG(F,order){
     s+=sib((X(c.a)+X(c.b))/2,Y[2],c.kids,Y[3]);
   });
   F.P.forEach(p=>{
-    const x=X(p.i),y=Y[p.gen],fill=p.aff?'var(--ink)':'var(--surface)';
+    const x=X(p.i),y=Y[p.gen],fill=p.aff?'var(--accent)':'var(--surface)';
     s+=p.sex==='M'?`<rect x="${x-half}" y="${y-half}" width="${2*half}" height="${2*half}" fill="${fill}"/>`:`<circle cx="${x}" cy="${y}" r="${half}" fill="${fill}"/>`;
     s+=`<text x="${x}" y="${y+half+14}" class="plab">${p.label}</text>`;
   });
@@ -767,7 +883,7 @@ function tipOf(step,q,si){
   switch(step){
     case 'par':{
       let tip;
-      if(rev)tip=t.sys==='abo'?'Work backwards from the children. A child with group O must be ii, so both parents passed on an i. Look at which groups appear and which are missing.':'Work backwards from the offspring. Ask which alleles the parents must have passed on to give these results, and look for ratios such as 1 : 1, 3 : 1 or 1 : 2 : 1.';
+      if(rev)tip=t.sys==='multi'?'Work backwards from the offspring. An albino offspring must be cc, so each parent passed on a c. A Himalayan offspring must be CHCH or CHc. Use the dominance order to decide what else each parent carries.':t.sys==='abo'?'Work backwards from the children. A child with group O must be ii, so both parents passed on an i. Look at which groups appear and which are missing.':'Work backwards from the offspring. Ask which alleles the parents must have passed on to give these results, and look for ratios such as 1 : 1, 3 : 1 or 1 : 2 : 1.';
       else if(t.sys==='dom')tip='"Homozygous" means two identical alleles. "Heterozygous" means one of each. A plain recessive phenotype can only be two small letters.';
       else if(t.sys==='multi')tip='Use the dominance order in the key. A homozygous rabbit has two identical alleles. A rabbit described as X/Y has one X allele and one Y allele.';
       else if(t.sys==='abo')tip='Group O is ii and group AB is IAIB. Group A can be IAIA or IAi and group B can be IBIB or IBi. The question tells you which.';
@@ -1180,7 +1296,10 @@ function showResults(){
   <div class="score">${got}<span style="font-size:1.4rem"> / ${tot}</span></div>
   <p><b>${pct}%</b> · ${band}</p>
   ${weak.length?`<p>Look again at: ${weak.join(', ')}.</p>`:'<p>Every box was correct. Well done.</p>'}
-  <ul class="rlist">${T.qs.map((q,k)=>`<li><b>Q${k+1}</b><span>${KINDS[q.kind].split(' (')[0]}${q.rev&&q.kind!=='reverse'?' (find the parents)':''} · ${q.t.name}</span><span class="badge">${T.res[k].got}/${T.res[k].tot}</span><button type="button" class="btn small" data-tgo="${k}">Review</button></li>`).join('')}</ul>
+  ${(()=>{const byK={};T.qs.forEach((q,k)=>{const o=byK[q.kind]||(byK[q.kind]={got:0,tot:0});o.got+=T.res[k].got;o.tot+=T.res[k].tot});
+    const wk=Object.entries(byK).filter(([k,o])=>o.got<o.tot).sort((a,b)=>a[1].got/a[1].tot-b[1].got/b[1].tot).slice(0,3);
+    return wk.length?`<div class="prac"><h3>Practise your weakest areas</h3><div class="actions">${wk.map(([k,o])=>`<button type="button" class="btn" data-tprac="${k}" data-pm="${o.got/o.tot<.5?'guided':'practice'}">${KINDS[k].split(' (')[0]} · ${Math.round(o.got/o.tot*100)}%</button>`).join('')}</div><p class="pcap">Each button opens practice questions of that type. Guided mode (with tips) opens when you scored under half.</p></div>`:''})()}
+  <ul class="rlist">${T.qs.map((q,k)=>`<li><b>Q${k+1}</b><span>${KINDS[q.kind].split(' (')[0]}${q.rev&&q.kind!=='reverse'?' (find the parents)':''} · ${q.t.name}</span><span class="badge ${T.res[k].got===T.res[k].tot?'ok':'bad'}">${T.res[k].got===T.res[k].tot?'✓':'✗'} ${T.res[k].got}/${T.res[k].tot}</span><button type="button" class="btn small" data-tgo="${k}">Review</button></li>`).join('')}</ul>
   <div class="actions"><button type="button" class="btn primary" data-tact="again">Take another test</button><button type="button" class="btn" data-tact="exit">Back to practice</button></div></section>`;
   window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -1195,6 +1314,11 @@ function testExit(){
   document.querySelector('.controls').hidden=false;$('#modeNote').hidden=false;
   S.mode=pm;setMode(pm);newQuestion();
 }
+function testPractise(k,m){
+  clearInterval(TST.tick);S.test=null;
+  document.querySelector('.controls').hidden=false;$('#modeNote').hidden=false;
+  S.kind=k;$('#kindSel').value=k;setMode(m);newQuestion();window.scrollTo({top:0,behavior:'smooth'});
+}
 function testInit(){
   $('#testN').innerHTML=[6,8,10,12,15].map(n=>`<option value="${n}"${n===8?' selected':''}>${n} questions</option>`).join('');
   $('#testOpen').addEventListener('click',()=>{const p=$('#testPanel');p.hidden=!p.hidden;if(!p.hidden)p.scrollIntoView({block:'start',behavior:'smooth'})});
@@ -1204,6 +1328,7 @@ function testInit(){
   $('#testStart').addEventListener('click',testStart);
   const st=$('#stage');
   st.addEventListener('click',e=>{
+    const pr=e.target.closest('[data-tprac]');if(pr){testPractise(pr.dataset.tprac,pr.dataset.pm);return}
     const g=e.target.closest('[data-tgo]'),a=e.target.closest('[data-tact]');
     if(g&&S.test){const k=+g.dataset.tgo;if(S.test.done)reviewQ(k);else{saveTestAns();S.test.i=k;S.test.warned=false;loadTestQ()}}
     else if(a){const x=a.dataset.tact;if(x==='submit')testSubmit();else if(x==='results')showResults();else if(x==='again'){testStart()}else if(x==='exit')testExit()}
@@ -1211,4 +1336,24 @@ function testInit(){
   st.addEventListener('input',()=>{if(S.test&&!S.test.done){saveTestAns();S.test.warned=false;const nav=document.querySelector('.tnav');if(nav)nav.outerHTML=testNavHTML()}});
 }
 testInit();
+</script>
+<script>
+'use strict';
+/* Light / dark switch. Dark is the default. The choice is remembered in localStorage when it is available. */
+(function(){
+  const root=document.documentElement,btn=document.querySelector('#themeBtn'),txt=document.querySelector('#themeTxt'),ico=document.querySelector('#themeIco');
+  const MOON='M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z',SUN='M12 4V2M12 22v-2M4 12H2M22 12h-2M5.6 5.6 4.2 4.2M19.8 19.8l-1.4-1.4M5.6 18.4l-1.4 1.4M19.8 4.2l-1.4 1.4M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z';
+  const light=()=>root.getAttribute('data-theme')==='light';
+  function paint(){btn.setAttribute('aria-pressed',String(light()));txt.textContent=light()?'Dark mode':'Light mode';ico.setAttribute('d',light()?MOON:SUN)}
+  btn.addEventListener('click',()=>{
+    if(light())root.removeAttribute('data-theme');else root.setAttribute('data-theme','light');
+    try{localStorage.setItem('mlab-theme',light()?'light':'dark')}catch(e){}
+    paint();
+  });
+  paint();
+  /* "How this works" strip: hidden after the student presses Got it (remembered when localStorage is available) */
+  const how=document.querySelector('#how'),hb=document.querySelector('#howClose');
+  try{if(localStorage.getItem('mlab-how')==='1')how.hidden=true}catch(e){}
+  hb.addEventListener('click',()=>{how.hidden=true;try{localStorage.setItem('mlab-how','1')}catch(e){}});
+})();
 </script>
