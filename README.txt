@@ -25,3 +25,5 @@ student's browser (localStorage) when the browser allows it.
 Hub link
   The "← Science Revision Hub" link at the top of the page goes to https://sites.google.com/cis.edu.hk/y11science.
   To change the address, edit the href in the link with class="hublink" in index.html (and in single-file.html if you use it).
+
+Light/Dark switch: a pill button at the top right of the header ("Light mode" / "Dark mode"). Dark is the default. The choice is remembered in the browser under the key monohybrid-theme and the site still works if storage is blocked. All colours are CSS variables at the top of css/style.css (:root for dark, :root[data-theme="light"] for light).

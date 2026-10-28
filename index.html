@@ -2,20 +2,20 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@500&display=swap">
-<script>try{if(localStorage.getItem('mlab-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+<script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('monohybrid-theme')==='light'?'light':'dark')}catch(e){document.documentElement.setAttribute('data-theme','dark')}</script>
 <link rel="stylesheet" href="css/style.css">
 <div class="wrap">
   <a class="hublink" href="https://sites.google.com/cis.edu.hk/y11science" target="_blank" rel="noopener">← Science Revision Hub</a>
   <header class="top">
     <div class="brand">
-      <svg viewBox="0 0 96 48" aria-hidden="true"><path d="M4 24C20 4 76 4 92 24C76 44 20 44 4 24Z" style="fill:var(--surface-2);stroke:var(--accent);stroke-width:3"/><circle cx="28" cy="24" r="9" style="fill:var(--dom)"/><circle cx="48" cy="24" r="9" style="fill:var(--rec)"/><circle cx="68" cy="24" r="9" style="fill:var(--dom)"/></svg>
+      <svg viewBox="0 0 96 48" aria-hidden="true"><path d="M4 24C20 4 76 4 92 24C76 44 20 44 4 24Z" style="fill:var(--raise);stroke:var(--accent);stroke-width:3"/><circle cx="28" cy="24" r="9" style="fill:var(--dom)"/><circle cx="48" cy="24" r="9" style="fill:var(--rec)"/><circle cx="68" cy="24" r="9" style="fill:var(--dom)"/></svg>
       <div>
         <div class="eyebrow"><i></i><span>Biology · Code of Life</span></div>
         <h1>Monohybrid <span class="a1">Cross</span> <span class="a2">Lab</span></h1>
         <p>Practise Mendel's crosses: parents, gametes, Punnett squares, F1 and F2.</p>
       </div>
     </div>
-    <div class="top-r"><div class="stats" id="stats" aria-label="Your session"></div><button type="button" class="btn theme" id="themeBtn" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path id="themeIco" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span id="themeTxt">Light mode</span></button></div>
+    <div class="top-r"><div class="stats" id="stats" aria-label="Your session"></div><button type="button" class="hbtn" id="themeBtn" aria-label="Switch to light theme">☀ Light mode</button></div>
   </header>
 
   <section class="how" id="how" aria-label="How this works">
